@@ -30,4 +30,22 @@ Rectangle {
                 onClicked: bottomBar.droneIconClicked()
             }
         }
+
+        Image {
+            id: dronMapIcon
+            anchors {
+                left: parent.left
+                leftMargin: 130
+                verticalCenter: parent.verticalCenter
+            }
+            height: parent.height * 0.85
+            fillMode: Image.PreserveAspectFit
+            source: "../assests/mapIcon1.png"
+
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                onClicked: bottomBar.droneIconClicked()
+            }
+        }
     }
