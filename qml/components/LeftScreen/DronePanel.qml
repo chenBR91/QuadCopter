@@ -7,6 +7,7 @@ Rectangle {
     property string droneType: ""
     property string droneVersion: ""
     property int batteryLevel: -1
+    property int batteryLevelPc: -1
 
     anchors {
         left: parent.left
@@ -71,17 +72,17 @@ Rectangle {
                 radius: 5
                 color: "#2a2a2a"
                 Rectangle {
-                    width: parent.width * Math.max(0, droneInfoPanel.batteryLevel / 100)
+                    width: parent.width * Math.max(0, droneInfoPanel.batteryLevelPc / 100)
                     height: parent.height
                     radius: parent.radius
-                    color: droneInfoPanel.batteryLevel > 50 ? "#00cc66"
-                         : droneInfoPanel.batteryLevel > 20 ? "#ffaa00"
+                    color: droneInfoPanel.batteryLevelPc > 50 ? "#00cc66"
+                         : droneInfoPanel.batteryLevelPc > 20 ? "#ffaa00"
                          : "#ff3333"
                 }
             }
             Text {
                 anchors.verticalCenter: parent.verticalCenter
-                text: droneInfoPanel.batteryLevel + "%"
+                text: droneInfoPanel.batteryLevelPc + "%"
                 color: "#ffffff"
                 font.pixelSize: 12
                 font.bold: true

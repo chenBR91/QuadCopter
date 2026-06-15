@@ -9,7 +9,8 @@ Rectangle {
         property string droneType: "QuadCopter" 
         property string droneVersion: "v2.4.1"
         property int batteryLevel: -1
-
+        property int batteryLevelPc: -1
+        
         anchors {
             left: parent.left
             right: rightScreen.left
@@ -34,6 +35,7 @@ Rectangle {
             droneType: leftScreen.droneType
             droneVersion: leftScreen.droneVersion
             batteryLevel: leftScreen.batteryLevel
+            batteryLevelPc: leftScreen.batteryLevelPc
         }
 
     }

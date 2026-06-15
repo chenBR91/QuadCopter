@@ -4,7 +4,7 @@ from PySide6.QtQml import QQmlApplicationEngine
 from PySide6.QtCore import QTimer, QObject, Signal, Slot
 
 from time import strftime, localtime
-
+from psutil import sensors_battery
 
 app = QGuiApplication(sys.argv)
 engine = QQmlApplicationEngine()
@@ -19,6 +19,7 @@ class Backend(QObject):
     forecastReceived = Signal(str)
     nameDroneUpdated = Signal(str)
     batteryUpdated = Signal(int)
+    currentBatteryCharge = Signal(int)
 
     def __init__(self):
         super().__init__()
@@ -42,8 +43,15 @@ class Backend(QObject):
         self.nameDroneUpdated.emit(self.drone_name)
     
     def update_battery(self):
-        self.battery_level = 70
-        self.batteryUpdated.emit(self.battery_level)
+        self._battery_level = 70
+        self.batteryUpdated.emit(self._battery_level)
+
+    def battery_level(self):
+        battery = sensors_battery()
+        if battery is not None:
+            self.currentBatteryCharge.emit(int(battery.percent))
+        else:
+            self.currentBatteryCharge.emit(0)
 
     def receive_forecast(self):
         # Coordinates for Tel Aviv
@@ -81,6 +89,7 @@ backend.update_time()
 backend.receive_forecast()
 backend.update_drone_name()
 backend.update_battery()
+backend.battery_level()
 
 sys.exit(app.exec())
 

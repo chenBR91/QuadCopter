@@ -8,4 +8,4 @@ PySide6_Essentials
 requests           
 shiboken6          
 urllib3            
-
+psutil

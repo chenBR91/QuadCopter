@@ -15,14 +15,15 @@ ApplicationWindow {
     property string currTime: "00:00:00"
     property string currDay: ""
     property string currForecast: ""
-
     property string droneName: ""
     property int batteryLevel: -1
+    property int batteryLevelPc: -1
 
     LeftScreen {
         id: leftScreen
         droneName: window.droneName
         batteryLevel: window.batteryLevel
+        batteryLevelPc: window.batteryLevelPc
     }
     
     RightScreen {
@@ -43,6 +44,10 @@ ApplicationWindow {
 
         function onBatteryUpdated(params) {
             window.batteryLevel = params
+        }
+
+        function onCurrentBatteryCharge(params) {
+            window.batteryLevelPc = params
         }
     }
 }
