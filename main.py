@@ -17,6 +17,8 @@ class Backend(QObject):
     timeUpdated = Signal(str)
     dayUpdated = Signal(str)
     forecastReceived = Signal(str)
+    nameDroneUpdated = Signal(str)
+    batteryUpdated = Signal(int)
 
     def __init__(self):
         super().__init__()
@@ -35,6 +37,13 @@ class Backend(QObject):
         curr_day = strftime("%a", localtime())
         self.dayUpdated.emit(curr_day)
 
+    def update_drone_name(self):
+        self.drone_name = 'Drone Alpha x1'
+        self.nameDroneUpdated.emit(self.drone_name)
+    
+    def update_battery(self):
+        self.battery_level = 70
+        self.batteryUpdated.emit(self.battery_level)
 
     def receive_forecast(self):
         # Coordinates for Tel Aviv
@@ -70,6 +79,8 @@ engine.rootObjects()[0].setProperty('backend', backend)
 
 backend.update_time()
 backend.receive_forecast()
+backend.update_drone_name()
+backend.update_battery()
 
 sys.exit(app.exec())
 

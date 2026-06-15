@@ -16,8 +16,13 @@ ApplicationWindow {
     property string currDay: ""
     property string currForecast: ""
 
+    property string droneName: ""
+    property int batteryLevel: -1
+
     LeftScreen {
         id: leftScreen
+        droneName: window.droneName
+        batteryLevel: window.batteryLevel
     }
     
     RightScreen {
@@ -26,5 +31,18 @@ ApplicationWindow {
 
     BottomBar {
         id: bottomBar
+        onDroneIconClicked: leftScreen.droneInfoVisible = !leftScreen.droneInfoVisible
+    }
+
+    Connections {
+        target: window.backend
+
+        function onNameDroneUpdated(params) {
+            window.droneName = params;
+        }
+
+        function onBatteryUpdated(params) {
+            window.batteryLevel = params
+        }
     }
 }

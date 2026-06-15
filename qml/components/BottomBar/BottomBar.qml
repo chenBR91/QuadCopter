@@ -3,6 +3,8 @@ import QtQuick 2.15
 
 Rectangle {
         id: bottomBar
+        signal droneIconClicked()
+
         anchors {
             left: parent.left
             right: parent.right
@@ -21,5 +23,11 @@ Rectangle {
             height: parent.height * 0.85
             fillMode: Image.PreserveAspectFit
             source: "../assests/drone_1.png"
+
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                onClicked: bottomBar.droneIconClicked()
+            }
         }
     }
